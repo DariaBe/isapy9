@@ -1,0 +1,1 @@
+imie = input("podaj imie:")
