@@ -19,11 +19,7 @@ ostatnia_litera = imie[-1:]
 if(ostatnia_litera == 'a'):
     print("Witam Panią")
 else:
-    print("Witam Pana")"""
-
-
-
-
+    print("Witam Pana")
 
 
 

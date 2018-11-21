@@ -6,7 +6,7 @@ print(wzorF)
 
 TempC = input("Podaj tempraturę w stopniach Celcjusza: ")
 
-TempC = float(TempC)
+TempC = int(TempC)
 
 TempF = 32 + 9/5 * TempC
 
@@ -20,7 +20,7 @@ print(wzorC)
 
 TempF = input("Podaj tempraturę w stopniach Fahrenheita: ")
 
-TempF = float(TempF)
+TempF = int(TempF)
 
 TempC = 5/9 * (TempF - 32)
 
@@ -30,7 +30,7 @@ print(TempC)
 
 r = input("Podaj dłogość promienia: ")
 
-r = float(r)
+r = int(r)
 
 wzor = "3.14 * r**2"
 
@@ -62,9 +62,9 @@ print(liczba_1 + liczba_2 + liczba_3 + liczba_4 + liczba_5 + liczba_6)
 
 #7. Napisz program do rozpoznawania czy podane liczba jest parzysta czy nie.
 
-liczba = input("Podaj liczbę: ")
+liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = float(liczba)
+liczba = int(liczba)
 
 sprawdzenie = (liczba % 2)
 
@@ -79,9 +79,9 @@ else:
 
 #8. Napisz program do sprawdzania czy liczba jest podzielna przez 3 lub 5 lub 7
 
-liczba = input("Podaj liczbę: ")
+liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = float(liczba)
+liczba = int(liczba)
 
 podzielna_przez_3 = liczba % 3
 
@@ -105,7 +105,7 @@ else:
 
 liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = float(liczba)
+liczba = int(liczba)
 
 podzielna_przez_3 = liczba % 3
 
