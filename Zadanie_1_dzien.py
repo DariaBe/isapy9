@@ -6,7 +6,7 @@ print(wzorF)
 
 TempC = input("Podaj tempraturę w stopniach Celcjusza: ")
 
-TempC = int(TempC)
+TempC = float(TempC)
 
 TempF = 32 + 9/5 * TempC
 
@@ -20,7 +20,7 @@ print(wzorC)
 
 TempF = input("Podaj tempraturę w stopniach Fahrenheita: ")
 
-TempF = int(TempF)
+TempF = float(TempF)
 
 TempC = 5/9 * (TempF - 32)
 
@@ -30,7 +30,7 @@ print(TempC)
 
 r = input("Podaj dłogość promienia: ")
 
-r = int(r)
+r = float(r)
 
 wzor = "3.14 * r**2"
 
@@ -64,7 +64,7 @@ print(liczba_1 + liczba_2 + liczba_3 + liczba_4 + liczba_5 + liczba_6)
 
 liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = int(liczba)
+liczba = float(liczba)
 
 sprawdzenie = (liczba % 2)
 
@@ -81,7 +81,7 @@ else:
 
 liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = int(liczba)
+liczba = float(liczba)
 
 podzielna_przez_3 = liczba % 3
 
@@ -105,7 +105,7 @@ else:
 
 liczba = input("Podaj liczbę całkowitą: ")
 
-liczba = int(liczba)
+liczba = float(liczba)
 
 podzielna_przez_3 = liczba % 3
 
@@ -138,3 +138,20 @@ if czy_przestępny == 0:
 
 else:
     print("Podany rok nie jest rokiem przestępnym.")
+
+#5. Napisz program, który rysuje prostokąt o zadanych rozmiarach (wysokość i szerokość) za pomocą znaków:
+#    | (bok)
+ #   - (góra/dół)
+  #  + (wierzchołek)
+
+szerokosc = 5
+wysokosc = 20
+
+print('+' + ("-" * szerokosc) + '+')
+print(('|' + (" " * szerokosc) + '|\n')*wysokosc, end='')
+print('+' + ("-" * szerokosc) + '+')
+
+wysokosc = input("Podaj wysokość piramidy: ")
+wysokosc = int(wysokosc)
+
+
