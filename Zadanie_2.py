@@ -63,4 +63,4 @@ if(wiek_psa <= 2):
 elif(wiek_psa >= 2):
     print((wiek_psa - 2) * 4 + 21)
 else:
-    print("Chyba nie masz pas")
+    print("Chyba nie masz psa")
