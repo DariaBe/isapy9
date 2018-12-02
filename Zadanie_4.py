@@ -1,26 +1,3 @@
-decyzja = None
-while(decyzja == None):
-    decyzja = input('Witaj w Multitool Python Program by iSA \n' 
-                    'Wybierz program który Cię interesuje:\n'
-                    '1) Rysowanie prostokąta o zadanych parametrach \n'
-                    '2) Obliczanie pola powierzchni koła \n'
-                    '3) Przeliczanie C->F \n'
-                    '4) Przeliczanie F->C \n'
-                    '5) Zwacanie pierwszej i ostatniej cyfry zadanej liczby \n'
-                    '6) Przeliczanie podanej liczby w systemie binarnym na system dziesiętny \n'
-                    '7) Sprawdzanie czy podana liczba jest liczbą parzystą \n'
-                    '8) Sprawdzanie czy podana liczba jest podzielna przez 3 lub 5 lub 7 \n'
-                    '9) Sprawdzanie czy podana liczba jest podzielna przez 3 i 5 i 7 \n'
-                    '10) Sprawdzenie czy podany rok jest rokiem przestępnym \n'
-                    '11) Rysowanie piramidy o zadanej wysokości \n'
-                    '12) Obliczanie wieku psa \n'
-                    '13) Rozmienianie pieniędzy \n'
-                    '14) Rozmienianie pieniędzy \n'
-                    'R) Wybierz program losowo bo nie wiem czego szukam:) \n'
-                    'X) Wyjście z programu \n'
-                    'Twój wybór: ')
-
-
 def rysuj_prostokat():
     """Ta funkcja rysuje prostokąt o zadanych wymiarach za pomocą znaków"""
     szerokosc = input('Podaj szerokość prostokąta: ')
@@ -290,4 +267,56 @@ def rysowanie_tabeli(lista=[]):
 
 
 rysowanie_tabeli()
+
+
+decyzja = None
+while(decyzja == None):
+    decyzja = input('Witaj w Multitool Python Program by iSA \n' 
+                    'Wybierz program który Cię interesuje:\n'
+                    '1) Rysowanie prostokąta o zadanych parametrach \n'
+                    '2) Obliczanie pola powierzchni koła \n'
+                    '3) Przeliczanie C->F \n'
+                    '4) Przeliczanie F->C \n'
+                    '5) Zwacanie pierwszej i ostatniej cyfry zadanej liczby \n'
+                    '6) Przeliczanie podanej liczby w systemie binarnym na system dziesiętny \n'
+                    '7) Sprawdzanie czy podana liczba jest liczbą parzystą \n'
+                    '8) Sprawdzanie czy podana liczba jest podzielna przez 3 lub 5 lub 7 \n'
+                    '9) Sprawdzanie czy podana liczba jest podzielna przez 3 i 5 i 7 \n'
+                    '10) Sprawdzenie czy podany rok jest rokiem przestępnym \n'
+                    '11) Rysowanie piramidy o zadanej wysokości \n'
+                    '12) Obliczanie wieku psa \n'
+                    '13) Rozmienianie pieniędzy \n'
+                    '14) Rysowanie tabeli \n'
+                    'X) Wyjście z programu \n'
+                    'Twój wybór: ')
+    if decyzja == '1':
+        rysuj_prostokat()
+    elif decyzja == '2':
+        pole_kola()
+    elif decyzja == '3':
+        przeliczanie_temperatur_c_f()
+    elif decyzja == '4':
+        przeliczanie_temperatur_f_c()
+    elif decyzja == '5':
+        pierwsza_i_ostatnia()
+    elif decyzja == '6':
+        przeliczanie_liczby()
+    elif decyzja == '7':
+        czy_parzysta()
+    elif decyzja == '8':
+        podzielna_3_5_lub_7()
+    elif decyzja == '9':
+        podzielna_3_5_i_7()
+    elif decyzja == '10':
+        sprawdzenie_roku()
+    elif decyzja == '11':
+        rysuj_piramide()
+    elif decyzja == '12':
+        przeliczanie_wieku_psa()
+    elif decyzja == '13':
+        rozmienić_na_monety()
+    elif decyzja == '14':
+        rysowanie_tabeli()
+    elif decyzja == 'X':
+        pass
 
