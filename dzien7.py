@@ -7,11 +7,11 @@
 
 
 from modul.wysylka import wyslij_emaila
+from modul.tabela import wartosci_w_tabeli
 import pickle
 # import smtplib
 # from email.mime.text import MIMEText
 # from email.mime.multipart import MIMEMultipart
-import pprint
 import datetime
 
 
@@ -33,16 +33,20 @@ def zamknij_dziennik(plik_dz):
 def dodaj_wpis(plik_dz):
     """Funkcja pyta użytkownika o dane o podanie daty i treści nowego wpisu po czym dodaje go do aktualnej listy plików.
         Funkcja wymusza podanie poprawnej daty w formacie RRRR-MM-DD.
-
         :param plik_dz:
         :return:"""
 
     try:
-        data = input('Podaj datę: ')
+        data = input('Podaj datę w formacie RRRR-MM-DD: ')
+        data = data.strip()
         datetime.datetime.strptime(data, '%Y-%m-%d')
     except ValueError:
-        print('Podana wartość nie reprezentuje daty. Podaj datę w formacie RRRR-MM-DD.')
-        return dodaj_wpis(plik_dz)
+        if not data:
+            print('Nie podałeś daty. Data jest wymagana')
+            return dodaj_wpis(plik_dz)
+        else:
+            print('Podana wartość nie reprezentuje daty.')
+            return dodaj_wpis(plik_dz)
 
     tresc = input('Podaj tresc: ')
     nowy_wpis = {'data': data, 'tresc': tresc}
@@ -140,20 +144,28 @@ def wyszukaj_fraze(plik_dz):
         Wyświetla również podsumowanie wyszukiwania
         :param plik_dz:
         :return:"""
-    wpisy = przeczytaj_plik(plik_dz)
+
     pytanie = input('Jeśli chcesz wyszukać wpis na podstawie daty wpisz "data", '
                     'jeśli na podstawie treści wpisz "treść". '
                     '\nCo wybierasz?')
     pytanie = pytanie.strip(' ')
     pytanie = pytanie.lower()
+    plik_dz = otworz_dziennik(plik_dziennika)
+    wpisy = przeczytaj_plik(plik_dz)
+
     if pytanie == 'data':
-        fraza = input("Podaj wyszukiwaną datę w formacie RRRR-MM-DD: ")
-        fraza = fraza.strip(' ')
+        try:
+            data = input('Podaj datę w formacie RRRR-MM-DD: ')
+            data = data.strip()
+            datetime.datetime.strptime(data, '%Y-%m-%d')
+        except:
+            print('Podana wartość nie reprezentuje daty.')
+            return wyszukaj_fraze(plik_dz)
         znaleziono_cos = False
         ilosc_wynikow = 0
         for wpis in wpisy:
         # if index, wpis in enumerate(wpisy):
-            if fraza in wpis['data']:
+            if data in wpis['data']:
                 znaleziono_cos = True
                 ilosc_wynikow += 1
                 print(wpis['tresc'])
@@ -163,6 +175,7 @@ def wyszukaj_fraze(plik_dz):
         else:
             print('Ilość wpisów: {}'. format(ilosc_wynikow))
     elif pytanie == 'treść' or pytanie == 'tresc':
+        # wpisy = przeczytaj_plik(plik_dz)
         fraza = input("Podaj wyszukiwaną frazę: ")
         fraza = fraza.strip(' ')
         znaleziono_cos = False
@@ -191,7 +204,7 @@ def zapytaj():
         print('Oto moje wpisy')
         plik_dz = otworz_dziennik(plik_dziennika)
         wpisy = przeczytaj_plik(plik_dz)
-        pprint.pprint(wpisy)
+        wartosci_w_tabeli(wpisy)
         zamknij_dziennik(plik_dz)
     if decyzja == '2':
         print('Dodawanie wpisu')
