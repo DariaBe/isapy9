@@ -135,7 +135,8 @@ def przeczytaj_plik(plik_dz):
 
 
 def wyszukaj_fraze(plik_dz):
-    """Funkcja w otwartym dzienniku szuka wpisu zawierającego w tresc zadaną przez użytkownika frazę
+    """Funkcja w otwartym dzienniku szuka wpisu, na podstawie wybranego klucza,
+        zawierającego podaną przez użytkownika frazę.
         Wyświetla również podsumowanie wyszukiwania
         :param plik_dz:
         :return:"""
