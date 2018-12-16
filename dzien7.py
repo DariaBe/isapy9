@@ -140,21 +140,46 @@ def wyszukaj_fraze(plik_dz):
         :param plik_dz:
         :return:"""
     wpisy = przeczytaj_plik(plik_dz)
-    fraza = input("Podaj wyszukiwaną frazę: ")
+    pytanie = input('Jeśli chcesz wyszukać wpis na podstawie daty wpisz "data", '
+                    'jeśli na podstawie treści wpisz "treść". '
+                    '\nCo wybierasz?')
+    pytanie = pytanie.strip(' ')
+    pytanie = pytanie.lower()
+    if pytanie == 'data':
+        fraza = input("Podaj wyszukiwaną datę w formacie RRRR-MM-DD: ")
+        fraza = fraza.strip(' ')
+        znaleziono_cos = False
+        ilosc_wynikow = 0
+        for wpis in wpisy:
+        # if index, wpis in enumerate(wpisy):
+            if fraza in wpis['data']:
+                znaleziono_cos = True
+                ilosc_wynikow += 1
+                print(wpis['tresc'])
 
-    znaleziono_cos = False
-    ilosc_wynikow = 0
-    for wpis in wpisy:
-    # if index, wpis in enumerate(wpisy):
-        if fraza in wpis['tresc']:
-            znaleziono_cos = True
-            ilosc_wynikow += 1
-            print(wpis['tresc'])
+        if ilosc_wynikow == 0:
+            print('W całym dzienniku nie ma takiej frazy.')
+        else:
+            print('Ilość wpisów: {}'. format(ilosc_wynikow))
+    elif pytanie == 'treść' or pytanie == 'tresc':
+        fraza = input("Podaj wyszukiwaną frazę: ")
+        fraza = fraza.strip(' ')
+        znaleziono_cos = False
+        ilosc_wynikow = 0
+        for wpis in wpisy:
+            # if index, wpis in enumerate(wpisy):
+            if fraza in wpis['tresc']:
+                znaleziono_cos = True
+                ilosc_wynikow += 1
+                print(wpis['tresc'])
 
-    if ilosc_wynikow == 0:
-        print('W całym dzienniku nie ma takiej frazy.')
+        if ilosc_wynikow == 0:
+            print('W całym dzienniku nie ma takiej frazy.')
+        else:
+            print('Ilość wpisów: {}'.format(ilosc_wynikow))
     else:
-        print('Ilość wpisów: {}'. format(ilosc_wynikow))
+        print('Wpisałeś niepoprawną wartość. Spróbuj jeszcze raz.')
+        return wyszukaj_fraze(plik_dz)
 
 
 def zapytaj():
