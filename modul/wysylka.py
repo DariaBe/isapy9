@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
+
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
 def wyslij_emaila(temat, tresc):
-    """Funkcja wysla e-maila o okreslonym temacie i tresci
+    """Funkcja wysła e-maila o okreslonym temacie i tresci
         :param temat: temat maila
         :param tresc: tresc maila
         :return:"""
@@ -21,5 +23,5 @@ def wyslij_emaila(temat, tresc):
     serwer.send_message(mail)
     serwer.quit()
 
-    print('Wyslano email')
+    print('Wysłano email')
 
