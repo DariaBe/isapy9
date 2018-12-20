@@ -30,24 +30,28 @@ def zamknij_dziennik(plik_dz):
     plik_dz.close()
 
 
+def poprawnosc_daty():
+    try:
+        data = input('Podaj datę w formacie RRRR-MM-DD: ')
+        data = data.strip()
+        datetime.datetime.strptime(data, '%Y-%m-%d')
+        return data
+    except ValueError:
+        if not data:
+            print('Nie podałeś daty. Data jest wymagana')
+            return poprawnosc_daty()
+        else:
+            print('Podana wartość nie reprezentuje daty.')
+            return poprawnosc_daty()
+
+
 def dodaj_wpis(plik_dz):
     """Funkcja pyta użytkownika o dane o podanie daty i treści nowego wpisu po czym dodaje go do aktualnej listy plików.
         Funkcja wymusza podanie poprawnej daty w formacie RRRR-MM-DD.
         :param plik_dz:
         :return:"""
 
-    try:
-        data = input('Podaj datę w formacie RRRR-MM-DD: ')
-        data = data.strip()
-        datetime.datetime.strptime(data, '%Y-%m-%d')
-    except ValueError:
-        if not data:
-            print('Nie podałeś daty. Data jest wymagana')
-            return dodaj_wpis(plik_dz)
-        else:
-            print('Podana wartość nie reprezentuje daty.')
-            return dodaj_wpis(plik_dz)
-
+    data = poprawnosc_daty()
     tresc = input('Podaj tresc: ')
     nowy_wpis = {'data': data, 'tresc': tresc}
 
@@ -62,7 +66,7 @@ def dodaj_wpis(plik_dz):
         nowe_wpisy.append(nowy_wpis)
     except:
         print('Nie było żadnego wpisu. Dodaj pierwszy wpis: ')
-        nowe_wpisy = []
+        nowe_wpisy=[]
         nowe_wpisy.append(nowy_wpis)
 
     plik_dz.seek(0)
@@ -154,13 +158,7 @@ def wyszukaj_fraze(plik_dz):
     wpisy = przeczytaj_plik(plik_dz)
 
     if pytanie == 'data':
-        try:
-            data = input('Podaj datę w formacie RRRR-MM-DD: ')
-            data = data.strip()
-            datetime.datetime.strptime(data, '%Y-%m-%d')
-        except:
-            print('Podana wartość nie reprezentuje daty.')
-            return wyszukaj_fraze(plik_dz)
+        data = poprawnosc_daty()
         znaleziono_cos = False
         ilosc_wynikow = 0
         for wpis in wpisy:
