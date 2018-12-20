@@ -21,6 +21,24 @@ print('|')
 print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_argumentow + '+')
 
 
+def rysowanie_tabeli(lista=[]):
+    """Ta fukncja przyjmuje listę w parametrze i rysuje tabelę"""
+    ilosc_kolumn = input('Podaj ilość kolumn: ')
+    ilosc_kolumn = int(ilosc_kolumn)
+    for i in ilosc_kolumn:
+
+    ilosc_argumentow = len(lista)
+    max_ilosc_liter = max(lista, key=len)
+    max_ilosc_liter = len(max_ilosc_liter)
+    print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_argumentow + '+')
+    for i in lista:
+        print(('| ' + i), end=' ')
+    print('|')
+    print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_argumentow + '+')
+
+
+rysowanie_tabeli(['col1', 'col2', 'col3'])
+
 # 2) Program przyjmuje kwotę w parametrze i wylicza jak rozmienić to na monety: 5, 2, 1, 0.5, 0.2, 0.1 wydając ich jak najmniej.
 
 

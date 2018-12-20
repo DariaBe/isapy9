@@ -1,4 +1,5 @@
-#1. Napisz program do przeliczania stopni Celsjusza na Fahrenheita (wyświetlając wzór i kolejne obliczenia)
+# 1. Napisz program do przeliczania stopni Celsjusza na Fahrenheita (wyświetlając wzór i kolejne obliczenia)
+
 
 wzorF = "TempF = 32 + 9/5 * TempC"
 
@@ -12,7 +13,7 @@ TempF = 32 + 9/5 * TempC
 
 print(TempF)
 
-#2. Napisz program do przeliczania stopni Fahrenheita na Celsjusza (wyświetlając wzór i kolejne obliczenia)
+# 2. Napisz program do przeliczania stopni Fahrenheita na Celsjusza (wyświetlając wzór i kolejne obliczenia)
 
 wzorC = "TempC = 5/9 * (TempF - 32)"
 
@@ -28,7 +29,7 @@ print(TempC)
 
 #3. Napisz program do obliczania pola powierzchni koła o zadanym promieniu (wyświetlając wzór i kolejne obliczenia)
 
-r = input("Podaj dłogość promienia: ")
+r = input("Podaj długość promienia: ")
 
 r = float(r)
 
@@ -45,6 +46,21 @@ print(pole_powierzchni)
 liczba = input("Podaj liczbę: ")
 
 print(liczba[0] +" "+ liczba[-1])
+
+
+#5. Napisz program, który rysuje prostokąt o zadanych rozmiarach (wysokość i szerokość) za pomocą znaków:
+#    | (bok)
+ #   - (góra/dół)
+  #  + (wierzchołek)
+
+szerokosc = 5
+wysokosc = 20
+
+print('+' + ("-" * szerokosc) + '+')
+print(('|' + (" " * szerokosc) + '|\n')*wysokosc, end='')
+print('+' + ("-" * szerokosc) + '+')
+
+
 
 
 #6. Napisz program do przeliczania liczby zapisanej w formacie binarnym na system dziesiętny. Załóż że wpisywane jest zawsze tylko 6 znaków 0/1, np 000110, 110010, 111111 etc.
@@ -139,19 +155,5 @@ if czy_przestępny == 0:
 else:
     print("Podany rok nie jest rokiem przestępnym.")
 
-#5. Napisz program, który rysuje prostokąt o zadanych rozmiarach (wysokość i szerokość) za pomocą znaków:
-#    | (bok)
- #   - (góra/dół)
-  #  + (wierzchołek)
-
-szerokosc = 5
-wysokosc = 20
-
-print('+' + ("-" * szerokosc) + '+')
-print(('|' + (" " * szerokosc) + '|\n')*wysokosc, end='')
-print('+' + ("-" * szerokosc) + '+')
-
-wysokosc = input("Podaj wysokość piramidy: ")
-wysokosc = int(wysokosc)
 
 

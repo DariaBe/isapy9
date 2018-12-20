@@ -57,6 +57,7 @@ while(decyzja == None):
                 return pole_kola()
 
 
+
         pole_kola()
 
     elif decyzja == '3':
@@ -279,14 +280,14 @@ while(decyzja == None):
             ilosc_kolumn = ilosc_kolumn.strip(' ')
             for i in ilosc_kolumn:
                 lista.append('col' + i)
-            ilosc_kolumn = len(lista)
-            max_ilosc_liter = max(lista, key=len)
-            max_ilosc_liter = len(max_ilosc_liter)
-            print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_kolumn + '+')
+                ilosc_kolumn = len(lista)
+                max_ilosc_liter = max(lista, key=len)
+                max_ilosc_liter = len(max_ilosc_liter)
+                print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_kolumn + '+')
             for i in lista:
                 print(('| ' + i), end=' ')
-            print('|')
-            print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_kolumn + '+')
+                print('|')
+                print(('+' + '-' * (max_ilosc_liter + 2)) * ilosc_kolumn + '+')
 
 
         rysowanie_tabeli()
