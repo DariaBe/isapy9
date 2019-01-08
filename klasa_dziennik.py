@@ -11,29 +11,23 @@ import pickle
 import datetime
 
 
-def otworz_dziennik(plik_dziennika):
-    """Funkcja otwiera plik dzinnika i zwraca handler do pliku w trybie zapis/odczyt
-       :param plik_dziennika:
-       :return:"""
-    dziennik = open(plik_dziennika, 'rb+')
-    return dziennik
-
-
-plik_dziennika = 'dziennik.dz'
-
-
 class Dziennik():
-    def __init__(self):
-        self.plik_dz = otworz_dziennik(plik_dziennika)
+    def __init__(self, plik_z_naszym_dziennikiem = 'dziennik.dz'):
+        self.plik_dziennika = plik_z_naszym_dziennikiem
+        self.plik_dz = self.otworz_dziennik()
         self.zawartosc_pliku = self.przeczytaj_plik()
         self.ilosc_wpisow = len(self.zawartosc_pliku)
 
-    def __len__(self):
-        return self.zawartosc_pliku
+    def otworz_dziennik(self):
+        """Funkcja otwiera plik dzinnika i zwraca handler do pliku w trybie zapis/odczyt
+           :param plik_dziennika:
+           :return:"""
+        dziennik = open(self.plik_dziennika, 'rb+')
+        return dziennik
 
     def przeczytaj_plik(self):
         """Funckja z otwartego pliku czyta dane i zwraca je w postaci listy słowników
-            :param plik_dz:
+            :param :
             :return:
             """
         try:
@@ -92,13 +86,12 @@ class Dziennik():
             :param plik_dz:
             :return:
             """
-        wpisy = self.zawartosc_pliku
-        ilosc_wpisow = self.ilosc_wpisow
-        print('Ilość wpisów w dzienniczku to: {}'.format(ilosc_wpisow))
+
+        print('Ilość wpisów w dzienniczku to: {}'.format(self.ilosc_wpisow))
         wpis_do_usuniecia = int(input('Podaj wpis do usunięcia: '))
 
-        if wpis_do_usuniecia <= ilosc_wpisow and wpis_do_usuniecia > 0:
-            del (wpisy[wpis_do_usuniecia - 1])
+        if wpis_do_usuniecia <= self.ilosc_wpisow and wpis_do_usuniecia > 0:
+            del (self.zawartosc_pliku[wpis_do_usuniecia - 1])
             indeks_do_usuniecia = wpis_do_usuniecia - 1
             self.plik_dz.seek(0)
 
@@ -107,7 +100,7 @@ class Dziennik():
             tresc = tresc + '\n  a dla użytkownika jest to wpis numerze: {}'.format(wpis_do_usuniecia)
 
             wyslij_emaila(temat, tresc)
-            pickle.dump(wpisy, self.plik_dz)
+            pickle.dump(self.zawartosc_pliku, self.plik_dz)
             print('Usunąłem wpis.')
         else:
             print('Nie ma takiego wpisu.')
@@ -124,13 +117,12 @@ class Dziennik():
                         '\nCo wybierasz?')
         pytanie = pytanie.strip(' ')
         pytanie = pytanie.lower()
-        wpisy = self.zawartosc_pliku
 
         if pytanie == 'data':
             data = self.poprawnosc_daty()
             znaleziono_cos = False
             ilosc_wynikow = 0
-            for wpis in wpisy:
+            for wpis in self.zawartosc_pliku:
                 if data in wpis['data']:
                     znaleziono_cos = True
                     ilosc_wynikow += 1
@@ -141,13 +133,11 @@ class Dziennik():
             else:
                 print('Ilość wpisów: {}'.format(ilosc_wynikow))
         elif pytanie == 'treść' or pytanie == 'tresc':
-            # wpisy = przeczytaj_plik(plik_dz)
             fraza = input("Podaj wyszukiwaną frazę: ")
             fraza = fraza.strip(' ')
             znaleziono_cos = False
             ilosc_wynikow = 0
-            for wpis in wpisy:
-                # if index, wpis in enumerate(wpisy):
+            for wpis in self.zawartosc_pliku:
                 if fraza in wpis['tresc']:
                     znaleziono_cos = True
                     ilosc_wynikow += 1
@@ -177,8 +167,6 @@ def zapytaj():
     """Funkcja do wywoływania zadań oczekiwanych przez użytkownika
         :return"""
 
-    dziennik = Dziennik()
-
     decyzja = input('Co wybierasz?')
     if decyzja == '1':
         print('Oto moje wpisy')
@@ -187,17 +175,14 @@ def zapytaj():
         dziennik.zamknij_dziennik()
     if decyzja == '2':
         print('Dodawanie wpisu')
-        # plik_dz = otworz_dziennik(plik_dziennika)
         dziennik.dodaj_wpis()
         dziennik.zamknij_dziennik()
     if decyzja == '3':
         print('Usuwanie wpisu')
-        plik_dz = otworz_dziennik(plik_dziennika)
         dziennik.usun_wpis()
         dziennik.zamknij_dziennik()
     if decyzja == '4':
         print('Wyszukaj')
-        plik_dz = otworz_dziennik(plik_dziennika)
         dziennik.wyszukaj_fraze()
         dziennik.zamknij_dziennik()
     elif decyzja == '5':
@@ -206,5 +191,6 @@ def zapytaj():
 
 while True:
     wyswietl_menu()
+    dziennik = Dziennik()
     zapytaj()
 
