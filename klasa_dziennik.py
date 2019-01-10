@@ -18,12 +18,29 @@ class Dziennik():
         self.zawartosc_pliku = self.przeczytaj_plik()
         self.ilosc_wpisow = len(self.zawartosc_pliku)
 
+    def __del__(self):
+        self.plik_dz.close()
+
+    @classmethod
+    def Ala(cls):
+        return cls('dziennik_ala.dz')
+
+    @classmethod
+    def Jan(cls):
+        return cls('dziennik_jan.dz')
+
+
     def otworz_dziennik(self):
         """Funkcja otwiera plik dzinnika i zwraca handler do pliku w trybie zapis/odczyt
            :param plik_dziennika:
            :return:"""
-        dziennik = open(self.plik_dziennika, 'rb+')
-        return dziennik
+        try:
+            dziennik = open(self.plik_dziennika, 'rb+')
+            return dziennik
+        except FileNotFoundError:
+            dziennik = open(self.plik_dziennika, 'wb+')
+            return self.otworz_dziennik()
+
 
     def przeczytaj_plik(self):
         """Funckja z otwartego pliku czyta dane i zwraca je w postaci listy słowników
@@ -34,15 +51,17 @@ class Dziennik():
             dane = pickle.load(self.plik_dz)
             return dane
         except:
+            return []
             print('Błąd')
 
-    def zamknij_dziennik(self):
-        """Funkcja zamyka plik dzinnika
-            :param plik_dz:
-            :return:"""
-        self.plik_dz.close()
+    # def zamknij_dziennik(self):
+    #     """Funkcja zamyka plik dzinnika
+    #         :param plik_dz:
+    #         :return:"""
+    #     self.plik_dz.close()
 
-    def poprawnosc_daty(self):
+    @staticmethod
+    def poprawnosc_daty():
         try:
             data = input('Podaj datę w formacie RRRR-MM-DD: ')
             data = data.strip()
@@ -51,10 +70,10 @@ class Dziennik():
         except ValueError:
             if not data:
                 print('Nie podałeś daty. Data jest wymagana')
-                return self.poprawnosc_daty()
+                return Dziennik.poprawnosc_daty()
             else:
                 print('Podana wartość nie reprezentuje daty.')
-                return self.poprawnosc_daty()
+                return Dziennik.poprawnosc_daty()
 
     def dodaj_wpis(self):
         """Funkcja pyta użytkownika o dane o podanie daty i treści nowego wpisu po czym dodaje go do aktualnej listy plików.
@@ -172,19 +191,19 @@ def zapytaj():
         print('Oto moje wpisy')
         wpisy = dziennik.zawartosc_pliku
         wartosci_w_tabeli(wpisy)
-        dziennik.zamknij_dziennik()
+        # dziennik.zamknij_dziennik()
     if decyzja == '2':
         print('Dodawanie wpisu')
         dziennik.dodaj_wpis()
-        dziennik.zamknij_dziennik()
+        # dziennik.zamknij_dziennik()
     if decyzja == '3':
         print('Usuwanie wpisu')
         dziennik.usun_wpis()
-        dziennik.zamknij_dziennik()
+        # dziennik.zamknij_dziennik()
     if decyzja == '4':
         print('Wyszukaj')
         dziennik.wyszukaj_fraze()
-        dziennik.zamknij_dziennik()
+        # dziennik.zamknij_dziennik()
     elif decyzja == '5':
         exit()
 
@@ -193,4 +212,5 @@ while True:
     wyswietl_menu()
     dziennik = Dziennik()
     zapytaj()
+    del (dziennik)
 
