@@ -32,7 +32,7 @@ class Dziennik():
 
     def otworz_dziennik(self):
         """Funkcja otwiera plik dzinnika i zwraca handler do pliku w trybie zapis/odczyt
-           :param plik_dziennika:
+           :param self:
            :return:"""
         try:
             dziennik = open(self.plik_dziennika, 'rb+')
@@ -44,24 +44,21 @@ class Dziennik():
 
     def przeczytaj_plik(self):
         """Funckja z otwartego pliku czyta dane i zwraca je w postaci listy słowników
-            :param :
-            :return:
+            :param self:
+            :return lista słowników:
             """
         try:
             dane = pickle.load(self.plik_dz)
             return dane
         except:
             return []
-            print('Błąd')
 
-    # def zamknij_dziennik(self):
-    #     """Funkcja zamyka plik dzinnika
-    #         :param plik_dz:
-    #         :return:"""
-    #     self.plik_dz.close()
 
     @staticmethod
     def poprawnosc_daty():
+        """Funkcja sprawdza, czy podana przez użytkownika wartośc reprezentuje datę
+            :param:
+            :return: data"""
         try:
             data = input('Podaj datę w formacie RRRR-MM-DD: ')
             data = data.strip()
@@ -78,7 +75,7 @@ class Dziennik():
     def dodaj_wpis(self):
         """Funkcja pyta użytkownika o dane o podanie daty i treści nowego wpisu po czym dodaje go do aktualnej listy plików.
             Funkcja wymusza podanie poprawnej daty w formacie RRRR-MM-DD.
-            :param plik_dz:
+            :param self:
             :return:"""
 
         data = self.poprawnosc_daty()
@@ -102,7 +99,7 @@ class Dziennik():
     def usun_wpis(self):
         """Funkcja usuwa wpis z dziennika na podstawie numeru podanego przez użytkownika
             a po usunięciu wysyła mail informacyjnego
-            :param plik_dz:
+            :param self:
             :return:
             """
 
@@ -128,7 +125,7 @@ class Dziennik():
         """Funkcja w otwartym dzienniku szuka wpisu, na podstawie wybranego klucza,
             zawierającego podaną przez użytkownika frazę.
             Wyświetla również podsumowanie wyszukiwania
-            :param plik_dz:
+            :param self:
             :return:"""
 
         pytanie = input('Jeśli chcesz wyszukać wpis na podstawie daty wpisz "data", '
